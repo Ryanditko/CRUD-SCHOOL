@@ -101,36 +101,56 @@ document.getElementById("listar-alunos").addEventListener("click", async () => {
 // Função de Editar Aluno
 async function editarAluno(id) {
   try {
+    console.log('Iniciando edição do aluno ID:', id);
     const response = await fetch(`${API_URL}/${id}`);
     
     if (!response.ok) {
       throw new Error(`Erro ao buscar aluno: ${response.status}`);
     }
 
-    const aluno = await response.json();
+    const responseData = await response.json();
+    console.log('Resposta completa da API:', responseData);
 
-    if (!aluno || !aluno.aluno) {
+    // Verifica se a resposta tem a estrutura esperada
+    const aluno = responseData.aluno || responseData;
+    console.log('Dados do aluno extraídos:', aluno);
+
+    if (!aluno) {
       throw new Error("Dados do aluno não encontrados");
     }
 
+    // Verifica se todos os campos necessários existem
+    if (!aluno.id || !aluno.nome || !aluno.data_nascimento || 
+        aluno.nota_primeiro_semestre === undefined || 
+        aluno.nota_segundo_semestre === undefined || 
+        !aluno.turma_id) {
+      console.error('Dados incompletos:', aluno);
+      throw new Error("Dados do aluno incompletos");
+    }
+
     // Ajusta a data para o formato correto do input
-    const dataNascimento = new Date(aluno.aluno.data_nascimento);
+    const dataNascimento = new Date(aluno.data_nascimento);
+    console.log('Data original:', aluno.data_nascimento);
+    console.log('Data convertida:', dataNascimento);
+    
     dataNascimento.setMinutes(dataNascimento.getMinutes() + dataNascimento.getTimezoneOffset());
     const dataFormatada = dataNascimento.toISOString().split('T')[0];
+    console.log('Data formatada:', dataFormatada);
 
     // Preenchendo o formulário de edição
-    document.getElementById("aluno-id").value = aluno.aluno.id;
-    document.getElementById("update-nome").value = aluno.aluno.nome;
+    document.getElementById("aluno-id").value = aluno.id;
+    document.getElementById("update-nome").value = aluno.nome;
     document.getElementById("update-data_nascimento").value = dataFormatada;
-    document.getElementById("update-nota_primeiro_semestre").value = aluno.aluno.nota_primeiro_semestre;
-    document.getElementById("update-nota_segundo_semestre").value = aluno.aluno.nota_segundo_semestre;
-    document.getElementById("update-turma_id").value = aluno.aluno.turma_id;
+    document.getElementById("update-nota_primeiro_semestre").value = aluno.nota_primeiro_semestre;
+    document.getElementById("update-nota_segundo_semestre").value = aluno.nota_segundo_semestre;
+    document.getElementById("update-turma_id").value = aluno.turma_id;
 
     // Exibindo o pop-up para edição
     document.getElementById("edit-popup").style.display = "block";
   } catch (error) {
-    console.error("Erro ao editar aluno:", error);
-    alert("Erro ao carregar dados do aluno. Por favor, tente novamente.");
+    console.error("Erro detalhado ao editar aluno:", error);
+    console.error("Stack trace:", error.stack);
+    alert(`Erro ao carregar dados do aluno: ${error.message}`);
   }
 }
 
@@ -140,6 +160,11 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
   try {
     const form = e.target;
     const alunoId = document.getElementById("aluno-id").value;
+    
+    if (!alunoId) {
+      throw new Error("ID do aluno não encontrado");
+    }
+
     const data = {
       nome: form["update-nome"].value,
       data_nascimento: form["update-data_nascimento"].value,
@@ -148,6 +173,8 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
       turma_id: parseInt(form["update-turma_id"].value)
     };
 
+    console.log('Dados para atualização:', data);
+
     const response = await fetch(`${API_URL}/${alunoId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -155,12 +182,14 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
     });
 
     if (!response.ok) {
-      throw new Error(`Erro ao atualizar aluno: ${response.status}`);
+      const errorData = await response.json();
+      throw new Error(`Erro ao atualizar aluno: ${response.status} - ${JSON.stringify(errorData)}`);
     }
 
     const result = await response.json();
+    console.log('Resposta da atualização:', result);
+    
     alert("Aluno atualizado com sucesso!");
-    console.log(result);
     form.reset();
 
     // Fechar o pop-up após a atualização
@@ -169,8 +198,9 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
     // Atualizar a lista de alunos
     document.getElementById("listar-alunos").click();
   } catch (error) {
-    console.error("Erro ao atualizar aluno:", error);
-    alert("Erro ao atualizar aluno. Por favor, tente novamente.");
+    console.error("Erro detalhado ao atualizar aluno:", error);
+    console.error("Stack trace:", error.stack);
+    alert(`Erro ao atualizar aluno: ${error.message}`);
   }
 });
 
