@@ -1,0 +1,80 @@
+/* Estilos específicos do módulo de alunos */
+.alunos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.aluno-card {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 64, 129, 0.2);
+    transition: all 0.3s ease;
+}
+
+.aluno-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(255, 64, 129, 0.2);
+}
+
+.aluno-card h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.aluno-card p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.aluno-card ul {
+    list-style: none;
+    margin: 0.5rem 0;
+    padding: 0;
+}
+
+.aluno-card ul li {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.aluno-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.aluno-actions .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .aluno-card {
+        padding: 1rem;
+    }
+
+    .aluno-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .aluno-card p,
+    .aluno-card ul li {
+        font-size: 0.8rem;
+    }
+
+    .aluno-actions {
+        flex-direction: column;
+    }
+
+    .aluno-actions .btn {
+        width: 100%;
+    }
+}
