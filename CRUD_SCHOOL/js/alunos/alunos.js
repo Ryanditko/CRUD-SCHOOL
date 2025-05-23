@@ -1,5 +1,18 @@
 const API_URL = "https://school-system-spi.onrender.com/api/alunos";
 
+/**
+ * Função para formatar a data corretamente, considerando o timezone
+ * @param {string} dateString - Data no formato ISO
+ * @returns {string} Data formatada no padrão brasileiro
+ */
+function formatarData(dateString) {
+    // Ajusta a data para o timezone local
+    const data = new Date(dateString);
+    // Adiciona o offset do timezone para compensar a conversão UTC
+    data.setMinutes(data.getMinutes() + data.getTimezoneOffset());
+    return data.toLocaleDateString('pt-BR');
+}
+
 document.getElementById("aluno-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const form = e.target;
@@ -60,7 +73,7 @@ document.getElementById("listar-alunos").addEventListener("click", async () => {
             <div class="aluno-card">
               <h3>${aluno.nome}</h3>
               <p><strong>ID:</strong> ${aluno.id}</p>
-              <p><strong>Data de Nascimento:</strong> ${new Date(aluno.data_nascimento).toLocaleDateString()}</p>
+              <p><strong>Data de Nascimento:</strong> ${formatarData(aluno.data_nascimento)}</p>
               <p><strong>Notas:</strong></p>
               <ul>
                 <li>1º Semestre: ${aluno.nota_primeiro_semestre}</li>
@@ -100,10 +113,15 @@ async function editarAluno(id) {
       throw new Error("Dados do aluno não encontrados");
     }
 
+    // Ajusta a data para o formato correto do input
+    const dataNascimento = new Date(aluno.aluno.data_nascimento);
+    dataNascimento.setMinutes(dataNascimento.getMinutes() + dataNascimento.getTimezoneOffset());
+    const dataFormatada = dataNascimento.toISOString().split('T')[0];
+
     // Preenchendo o formulário de edição
     document.getElementById("aluno-id").value = aluno.aluno.id;
     document.getElementById("update-nome").value = aluno.aluno.nome;
-    document.getElementById("update-data_nascimento").value = aluno.aluno.data_nascimento.split('T')[0];
+    document.getElementById("update-data_nascimento").value = dataFormatada;
     document.getElementById("update-nota_primeiro_semestre").value = aluno.aluno.nota_primeiro_semestre;
     document.getElementById("update-nota_segundo_semestre").value = aluno.aluno.nota_segundo_semestre;
     document.getElementById("update-turma_id").value = aluno.aluno.turma_id;
