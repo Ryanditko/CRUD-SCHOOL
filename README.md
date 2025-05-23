@@ -4,6 +4,6 @@ Projeto de gerenciamento escolar utilizando operações **CRUD** (Create, Read, 
 
 ## ⚙️ Funcionalidades
 
-- **Cadastro de Alunos:** nome, e-mail, data de nascimento e notas.
-- **Cadastro de Professores:** nome, e-mail, disciplina e telefone.
-- **Cadastro de Turmas:** nome da turma, série/ano e professor responsável.
+- **Cadastro de Alunos** 
+- **Cadastro de Professores** 
+- **Cadastro de Turmas** 
