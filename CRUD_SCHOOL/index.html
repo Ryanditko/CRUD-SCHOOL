@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Meta tags básicas para SEO e responsividade -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Gerenciamento Escolar - Gerencie alunos, professores e turmas de forma eficiente">
+    <title>Sistema de Gerenciamento Escolar</title>
+
+    <!-- Recursos externos -->
+    <!-- Google Fonts - Fonte Roboto para melhor legibilidade -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome - Ícones modernos e responsivos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Configurações PWA (Progressive Web App) -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icons/icon-192x192.png">
+    <meta name="theme-color" content="#ff4081">
+</head>
+<body>
+    <!-- Container principal para centralizar o conteúdo -->
+    <div class="container">
+        <!-- Cabeçalho com título e subtítulo -->
+        <header>
+            <h1>Sistema de Gerenciamento Escolar</h1>
+            <p class="subtitle">Gerencie alunos, professores e turmas de forma eficiente</p>
+        </header>
+
+        <!-- Menu de navegação principal -->
+        <nav class="nav">
+            <ul class="nav-links">
+                <!-- Links para as diferentes seções do sistema -->
+                <li><a href="alunos.html"><i class="fas fa-user-graduate"></i> Alunos</a></li>
+                <li><a href="professores.html"><i class="fas fa-chalkboard-teacher"></i> Professores</a></li>
+                <li><a href="turmas.html"><i class="fas fa-users"></i> Turmas</a></li>
+            </ul>
+        </nav>
+
+        <!-- Conteúdo principal da página -->
+        <main>
+            <!-- Grid de cards para acesso rápido às funcionalidades -->
+            <div class="cards-container">
+                <!-- Card de Alunos -->
+                <div class="card" data-aos="fade-up">
+                    <div class="card-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h2>Alunos</h2>
+                    <p>Gerencie o cadastro e histórico dos alunos</p>
+                    <div class="card-features">
+                        <span>Cadastro Completo</span>
+                        <span>Controle de Notas</span>
+                        <span>Histórico Escolar</span>
+                    </div>
+                    <a href="alunos.html" class="btn">Acessar</a>
+                </div>
+
+                <!-- Card de Professores -->
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h2>Professores</h2>
+                    <p>Gerencie o cadastro e disciplinas dos professores</p>
+                    <div class="card-features">
+                        <span>Cadastro de Professores</span>
+                        <span>Disciplinas Lecionadas</span>
+                        <span>Histórico Profissional</span>
+                    </div>
+                    <a href="professores.html" class="btn">Acessar</a>
+                </div>
+
+                <!-- Card de Turmas -->
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h2>Turmas</h2>
+                    <p>Gerencie as turmas e suas composições</p>
+                    <div class="card-features">
+                        <span>Criação de Turmas</span>
+                        <span>Alocação de Alunos</span>
+                        <span>Distribuição de Professores</span>
+                    </div>
+                    <a href="turmas.html" class="btn">Acessar</a>
+                </div>
+            </div>
+        </main>
+
+        <!-- Rodapé com informações de copyright -->
+        <footer>
+            <p>&copy; 2025 Sistema de Gerenciamento Escolar. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script>
+        // Animação dos cards ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Registro do Service Worker para funcionalidades PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado com sucesso:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Erro ao registrar Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
