@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cadastro e gerenciamento de turmas">
+    <title>Cadastro de Turma - Sistema de Gerenciamento Escolar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gerenciamento de Turmas</h1>
+            <p class="subtitle">Cadastre e gerencie as turmas da sua escola</p>
+        </header>
+
+        <nav class="nav">
+            <ul class="nav-links">
+                <li><a href="alunos.html">👨‍🎓 Alunos</a></li>
+                <li><a href="professores.html">👨‍🏫 Professores</a></li>
+                <li><a href="turmas.html" class="active">👥 Turmas</a></li>
+            </ul>
+        </nav>
+
+        <a href="index.html" class="btn-voltar">← Voltar para a Página Principal</a>
+
+        <main>
+            <div class="form-container">
+                <h2>Cadastro de Turma</h2>
+                <form id="turma-form">
+                    <div class="form-group">
+                        <label for="nome">Nome da Turma:</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Digite o nome da turma">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="materia">Matéria:</label>
+                        <input type="text" id="materia" name="materia" required placeholder="Digite a matéria da turma">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descricao">Descrição:</label>
+                        <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição para a turma">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ativo">Status:</label>
+                        <select id="ativo" name="ativo" required>
+                            <option value="1">Ativa</option>
+                            <option value="0">Inativa</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="professor_id">ID do Professor:</label>
+                        <input type="number" id="professor_id" name="professor_id" required placeholder="Digite o ID do professor responsável">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Cadastrar Turma</button>
+                </form>
+            </div>
+
+            <div class="actions-container">
+                <button id="listar-turmas" class="btn btn-primary">📋 Listar Turmas</button>
+            </div>
+
+            <div id="turmas-lista" class="lista-container"></div>
+
+            <!-- Pop-up para editar turma -->
+            <div id="edit-popup" class="popup">
+                <div class="popup-content">
+                    <h2>Editar Turma</h2>
+                    <form id="update-form">
+                        <input type="hidden" id="turma-id">
+                        
+                        <div class="form-group">
+                            <label for="update-nome">Nome da Turma:</label>
+                            <input type="text" id="update-nome" required placeholder="Digite o nome da turma">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="update-materia">Matéria:</label>
+                            <input type="text" id="update-materia" required placeholder="Digite a matéria da turma">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="update-descricao">Descrição:</label>
+                            <input type="text" id="update-descricao" placeholder="Digite uma descrição para a turma">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="update-ativo">Status:</label>
+                            <select id="update-ativo" required>
+                                <option value="1">Ativa</option>
+                                <option value="0">Inativa</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="update-professor_id">ID do Professor:</label>
+                            <input type="number" id="update-professor_id" required placeholder="Digite o ID do professor responsável">
+                        </div>
+                        
+                        <div class="popup-buttons">
+                            <button type="submit" class="btn btn-primary">Atualizar</button>
+                            <button type="button" id="close-popup" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Sistema de Gerenciamento Escolar. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="js/turmas/turmas.js"></script>
+</body>
+</html>

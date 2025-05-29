@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Meta tags básicas para SEO e responsividade -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cadastro e gerenciamento de professores">
+    <title>Cadastro de Professor - Sistema de Gerenciamento Escolar</title>
+
+    <!-- Recursos externos -->
+    <!-- Google Fonts - Fonte Poppins para melhor legibilidade -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Container principal para centralizar o conteúdo -->
+    <div class="container">
+        <!-- Cabeçalho com título e subtítulo -->
+        <header>
+            <h1>Gerenciamento de Professores</h1>
+            <p class="subtitle">Cadastre e gerencie os professores da sua escola</p>
+        </header>
+
+        <!-- Menu de navegação principal -->
+        <nav class="nav">
+            <ul class="nav-links">
+                <!-- Links para as diferentes seções do sistema -->
+                <li><a href="alunos.html">👨‍🎓 Alunos</a></li>
+                <li><a href="professores.html" class="active">👨‍🏫 Professores</a></li>
+                <li><a href="turmas.html">👥 Turmas</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Link para voltar à página principal -->
+        <a href="index.html" class="btn-voltar">← Voltar para a Página Principal</a>
+
+        <!-- Conteúdo principal da página -->
+        <main>
+            <!-- Formulário de cadastro de professor -->
+            <div class="form-container">
+                <h2>Cadastro de Professor</h2>
+                <form id="professor-form">
+                    <!-- Campo para nome do professor -->
+                    <div class="form-group">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Digite o nome completo do professor">
+                    </div>
+                    
+                    <!-- Campo para idade do professor -->
+                    <div class="form-group">
+                        <label for="idade">Idade:</label>
+                        <input type="number" id="idade" name="idade" required min="18" max="100" placeholder="Digite a idade do professor">
+                    </div>
+                    
+                    <!-- Campo para matéria lecionada -->
+                    <div class="form-group">
+                        <label for="materia">Matéria:</label>
+                        <input type="text" id="materia" name="materia" required placeholder="Digite a matéria lecionada">
+                    </div>
+                    
+                    <!-- Campo para observações -->
+                    <div class="form-group">
+                        <label for="observacoes">Observações:</label>
+                        <input type="text" id="observacoes" name="observacoes" placeholder="Digite alguma observação sobre o professor">
+                    </div>
+                    
+                    <!-- Botão de submissão do formulário -->
+                    <button type="submit" class="btn btn-primary">Cadastrar Professor</button>
+                </form>
+            </div>
+
+            <!-- Container para ações adicionais -->
+            <div class="actions-container">
+                <button id="listar-professores" class="btn btn-primary">📋 Listar Professores</button>
+            </div>
+
+            <!-- Container para exibir a lista de professores -->
+            <div id="professores-lista" class="lista-container"></div>
+
+            <!-- Pop-up para edição de professor -->
+            <div id="edit-popup" class="popup">
+                <div class="popup-content">
+                    <h2>Editar Professor</h2>
+                    <form id="update-form">
+                        <!-- Campo oculto para armazenar o ID do professor -->
+                        <input type="hidden" id="professor-id">
+                        
+                        <!-- Campos do formulário de edição -->
+                        <div class="form-group">
+                            <label for="update-nome">Nome Completo:</label>
+                            <input type="text" id="update-nome" name="nome" required placeholder="Digite o nome completo do professor">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="update-idade">Idade:</label>
+                            <input type="number" id="update-idade" name="idade" required min="18" max="100" placeholder="Digite a idade do professor">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="update-materia">Matéria:</label>
+                            <input type="text" id="update-materia" name="materia" required placeholder="Digite a matéria lecionada">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="update-observacoes">Observações:</label>
+                            <input type="text" id="update-observacoes" name="observacoes" placeholder="Digite alguma observação sobre o professor">
+                        </div>
+                        
+                        <!-- Botões de ação do pop-up -->
+                        <div class="popup-buttons">
+                            <button type="submit" class="btn btn-primary">Atualizar</button>
+                            <button type="button" id="close-popup" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Rodapé com informações de copyright -->
+        <footer>
+            <p>&copy; 2025 Sistema de Gerenciamento Escolar. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script src="js/professores/professores.js"></script>
+</body>
+</html>
