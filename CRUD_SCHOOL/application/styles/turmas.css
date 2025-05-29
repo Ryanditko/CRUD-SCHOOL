@@ -1,0 +1,87 @@
+/* Estilos específicos do módulo de turmas */
+.turmas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.turma-card {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 64, 129, 0.2);
+    transition: all 0.3s ease;
+}
+
+.turma-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(255, 64, 129, 0.2);
+}
+
+.turma-card h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.turma-card p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.turma-card .status {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.turma-card .status.ativa {
+    background: rgba(0, 200, 83, 0.2);
+    color: #00c853;
+    border: 1px solid rgba(0, 200, 83, 0.3);
+}
+
+.turma-card .status.inativa {
+    background: rgba(213, 0, 0, 0.2);
+    color: #d50000;
+    border: 1px solid rgba(213, 0, 0, 0.3);
+}
+
+.turma-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.turma-actions .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .turma-card {
+        padding: 1rem;
+    }
+
+    .turma-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .turma-card p {
+        font-size: 0.8rem;
+    }
+
+    .turma-actions {
+        flex-direction: column;
+    }
+
+    .turma-actions .btn {
+        width: 100%;
+    }
+}
