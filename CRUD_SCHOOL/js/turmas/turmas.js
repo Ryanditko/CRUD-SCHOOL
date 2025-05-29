@@ -1,4 +1,4 @@
-const API_URL = "https://school-system-spi.onrender.com/api/turmas";
+const API_URL_TURMAS = "https://school-system-spi.onrender.com/api/turmas";
 
 document.getElementById("turma-form").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -12,7 +12,7 @@ document.getElementById("turma-form").addEventListener("submit", async (e) => {
     };
 
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(API_URL_TURMAS, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -38,7 +38,7 @@ document.getElementById("listar-turmas").addEventListener("click", async () => {
         const container = document.getElementById("turmas-lista");
         container.innerHTML = "<p>Carregando turmas...</p>";
 
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL_TURMAS);
         
         if (!response.ok) {
             throw new Error(`Erro ao buscar turmas: ${response.status}`);
@@ -81,7 +81,7 @@ document.getElementById("listar-turmas").addEventListener("click", async () => {
 // Função de Editar Turma
 async function editarTurma(id) {
     try {
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetch(`${API_URL_TURMAS}/${id}`);
         
         if (!response.ok) {
             throw new Error(`Erro ao buscar turma: ${response.status}`);
@@ -123,7 +123,7 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
             professor_id: parseInt(form["update-professor_id"].value)
         };
 
-        const response = await fetch(`${API_URL}/${turmaId}`, {
+        const response = await fetch(`${API_URL_TURMAS}/${turmaId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -156,7 +156,7 @@ async function excluirTurma(id) {
     }
 
     try {
-        const response = await fetch(`${API_URL}/${id}`, {
+        const response = await fetch(`${API_URL_TURMAS}/${id}`, {
             method: "DELETE"
         });
 

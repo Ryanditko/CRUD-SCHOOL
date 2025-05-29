@@ -1,4 +1,4 @@
-const API_URL = "https://school-system-spi.onrender.com/api/alunos";
+const API_URL_ALUNOS = "https://school-system-spi.onrender.com/api/alunos";
 
 /**
  * Função para formatar a data corretamente, considerando o timezone
@@ -25,7 +25,7 @@ document.getElementById("aluno-form").addEventListener("submit", async (e) => {
   };
 
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(API_URL_ALUNOS, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
@@ -51,7 +51,7 @@ document.getElementById("listar-alunos").addEventListener("click", async () => {
     const container = document.getElementById("alunos-lista");
     container.innerHTML = "<p>Carregando alunos...</p>";
 
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL_ALUNOS);
     
     if (!response.ok) {
       throw new Error(`Erro ao buscar alunos: ${response.status}`);
@@ -102,7 +102,7 @@ document.getElementById("listar-alunos").addEventListener("click", async () => {
 async function editarAluno(id) {
   try {
     console.log('Iniciando edição do aluno ID:', id);
-    const response = await fetch(`${API_URL}/${id}`);
+    const response = await fetch(`${API_URL_ALUNOS}/${id}`);
     
     if (!response.ok) {
       throw new Error(`Erro ao buscar aluno: ${response.status}`);
@@ -175,7 +175,7 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
 
     console.log('Dados para atualização:', data);
 
-    const response = await fetch(`${API_URL}/${alunoId}`, {
+    const response = await fetch(`${API_URL_ALUNOS}/${alunoId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
@@ -211,7 +211,7 @@ async function excluirAluno(id) {
   }
 
   try {
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL_ALUNOS}/${id}`, {
       method: "DELETE"
     });
 

@@ -5,7 +5,7 @@
  */
 
 // URL base da API para operações com professores
-const API_URL = "https://school-system-spi.onrender.com/api/professores";
+const API_URL_PROFESSORES = "https://school-system-spi.onrender.com/api/professores";
 
 /**
  * Valida os dados do professor antes de enviar para a API
@@ -29,7 +29,7 @@ function validarDadosProfessor(data) {
         ...data,
         nome: data.nome.trim(),
         materia: data.materia.trim(),
-        observacao: data.observacao ? data.observacao.trim() : ''
+        observacoes: data.observacoes ? data.observacoes.trim() : ''
     };
 }
 
@@ -78,7 +78,7 @@ function fecharPopup() {
 async function editarProfessor(id) {
     try {
         // Busca os dados do professor na API
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetch(`${API_URL_PROFESSORES}/${id}`);
         if (!response.ok) throw new Error('Erro ao buscar dados do professor');
         
         const professor = await response.json();
@@ -88,7 +88,7 @@ async function editarProfessor(id) {
         document.getElementById('update-nome').value = professor.nome;
         document.getElementById('update-idade').value = professor.idade;
         document.getElementById('update-materia').value = professor.materia;
-        document.getElementById('update-observacao').value = professor.observacao || '';
+        document.getElementById('update-observacoes').value = professor.observacoes || '';
         
         abrirPopup();
     } catch (error) {
@@ -104,7 +104,7 @@ async function excluirProfessor(id) {
     if (!confirm('Tem certeza que deseja excluir este professor?')) return;
     
     try {
-        const response = await fetch(`${API_URL}/${id}`, {
+        const response = await fetch(`${API_URL_PROFESSORES}/${id}`, {
             method: 'DELETE'
         });
         
@@ -126,7 +126,7 @@ async function listarProfessores() {
         container.innerHTML = '<p>Carregando professores...</p>';
 
         // Busca a lista de professores na API
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL_PROFESSORES);
         if (!response.ok) throw new Error('Erro ao buscar professores');
         
         const professores = await response.json();
@@ -147,7 +147,7 @@ async function listarProfessores() {
                         <p><strong>ID:</strong> ${professor.id}</p>
                         <p><strong>Idade:</strong> ${professor.idade} anos</p>
                         <p><strong>Matéria:</strong> ${professor.materia}</p>
-                        ${professor.observacao ? `<p><strong>Observação:</strong> ${professor.observacao}</p>` : ''}
+                        ${professor.observacoes ? `<p><strong>Observações:</strong> ${professor.observacoes}</p>` : ''}
                         <div class="professor-actions">
                             <button onclick="editarProfessor(${professor.id})" class="btn btn-primary">Editar</button>
                             <button onclick="excluirProfessor(${professor.id})" class="btn btn-secondary">Excluir</button>
@@ -176,13 +176,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     nome: formData.get('nome'),
                     idade: parseInt(formData.get('idade')),
                     materia: formData.get('materia'),
-                    observacao: formData.get('observacao')
+                    observacoes: formData.get('observacoes')
                 };
                 
                 // Valida e envia os dados
                 const dadosValidados = validarDadosProfessor(data);
                 
-                const response = await fetch(API_URL, {
+                const response = await fetch(API_URL_PROFESSORES, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -215,13 +215,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     nome: formData.get('nome'),
                     idade: parseInt(formData.get('idade')),
                     materia: formData.get('materia'),
-                    observacao: formData.get('observacao')
+                    observacoes: formData.get('observacoes')
                 };
                 
                 // Valida e envia os dados
                 const dadosValidados = validarDadosProfessor(data);
                 
-                const response = await fetch(`${API_URL}/${id}`, {
+                const response = await fetch(`${API_URL_PROFESSORES}/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
