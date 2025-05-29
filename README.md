@@ -8,5 +8,5 @@ Projeto de gerenciamento escolar utilizando operações **CRUD** (Create, Read, 
 - **Cadastro de Professores** 
 - **Cadastro de Turmas** 
 
-## Hospedagem Vercel: <br>
+## Hospedagem: <br>
 - https://crud-school-five.vercel.app
