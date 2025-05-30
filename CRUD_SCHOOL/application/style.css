@@ -1,4 +1,4 @@
-/* Importação dos arquivos CSS */
+/* Importação dos arquivos CSS modulares para melhor organização do código */
 @import url('css/base.css');
 @import url('css/header.css');
 @import url('css/forms.css');
@@ -9,61 +9,72 @@
 @import url('css/alunos.css');
 @import url('css/turmas.css');
 
-/* Reset CSS */
+/* Reset CSS - Remove margens e paddings padrão e define box-sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Variáveis CSS */
+/* Variáveis CSS - Define as cores e valores reutilizáveis do tema */
 :root {
-    --primary-color: #ff4081;
-    --primary-dark: #c60055;
-    --secondary-color: #ff6d00;
-    --accent-color: #ff9100;
-    --success-color: #00c853;
-    --warning-color: #ffd600;
-    --error-color: #d50000;
-    --background-color: #000000;
-    --text-color: #ffffff;
-    --text-light: #e0e0e0;
-    --text-secondary: #b0b0b0;
-    --border-radius: 8px;
-    --box-shadow: 0 4px 6px rgba(255, 64, 129, 0.1);
-    --transition: all 0.3s ease;
-    --gradient-start: #000000;
-    --gradient-middle: #ff4081;
-    --gradient-end: #ff6d00;
+    /* Cores principais do tema */
+    --primary-color: #ff4081;    /* Cor rosa principal */
+    --primary-dark: #c60055;     /* Versão mais escura do rosa */
+    --secondary-color: #ff6d00;  /* Cor laranja secundária */
+    --accent-color: #ff9100;     /* Cor de destaque */
+    
+    /* Cores de feedback */
+    --success-color: #00c853;    /* Verde para sucesso */
+    --warning-color: #ffd600;    /* Amarelo para avisos */
+    --error-color: #d50000;      /* Vermelho para erros */
+    
+    /* Cores de fundo e texto */
+    --background-color: #000000; /* Fundo preto */
+    --text-color: #ffffff;       /* Texto branco */
+    --text-light: #e0e0e0;       /* Texto cinza claro */
+    --text-secondary: #b0b0b0;   /* Texto secundário */
+    
+    /* Valores de design */
+    --border-radius: 8px;        /* Arredondamento de bordas */
+    --box-shadow: 0 4px 6px rgba(255, 64, 129, 0.1); /* Sombra padrão */
+    --transition: all 0.3s ease; /* Transição suave */
+    
+    /* Gradientes */
+    --gradient-start: #000000;   /* Início do gradiente */
+    --gradient-middle: #ff4081;  /* Meio do gradiente */
+    --gradient-end: #ff6d00;     /* Fim do gradiente */
 }
 
-/* Estilos Gerais */
+/* Estilos Gerais do Body */
 body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
+    font-family: 'Roboto', sans-serif; /* Fonte principal */
+    line-height: 1.6;                  /* Espaçamento entre linhas */
+    color: var(--text-color);          /* Cor do texto */
     background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-middle) 50%, var(--gradient-end) 100%);
-    min-height: 100vh;
+    min-height: 100vh;                 /* Altura mínima da viewport */
 }
 
+/* Container principal - Centraliza e limita a largura do conteúdo */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
 }
 
-/* Header */
+/* Estilos do Cabeçalho */
 header {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8);    /* Fundo semi-transparente */
     padding: 2rem;
     border-radius: 8px;
     box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);       /* Efeito de vidro fosco */
     border: 1px solid rgba(255, 64, 129, 0.2);
     margin-bottom: 2rem;
     text-align: center;
 }
 
+/* Título principal com gradiente */
 header h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -73,12 +84,13 @@ header h1 {
     -webkit-text-fill-color: transparent;
 }
 
+/* Subtítulo */
 .subtitle {
     color: var(--text-secondary);
     font-size: 1.2rem;
 }
 
-/* Navegação */
+/* Barra de Navegação */
 .nav {
     background: rgba(0, 0, 0, 0.8);
     padding: 1rem;
@@ -89,6 +101,7 @@ header h1 {
     margin-bottom: 2rem;
 }
 
+/* Lista de links de navegação */
 .nav-links {
     display: flex;
     justify-content: center;
@@ -96,6 +109,7 @@ header h1 {
     list-style: none;
 }
 
+/* Estilo dos links de navegação */
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
@@ -107,6 +121,7 @@ header h1 {
     font-weight: 500;
 }
 
+/* Efeito hover nos links */
 .nav-links a:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3);
@@ -129,12 +144,13 @@ header h1 {
     font-weight: 500;
 }
 
+/* Efeito hover no botão voltar */
 .btn-voltar:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Formulários */
+/* Container de Formulários */
 .form-container {
     background: rgba(0, 0, 0, 0.8);
     padding: 2rem;
@@ -145,10 +161,12 @@ header h1 {
     margin-bottom: 2rem;
 }
 
+/* Grupos de campos do formulário */
 .form-group {
     margin-bottom: 1.5rem;
 }
 
+/* Labels dos campos */
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
@@ -156,6 +174,7 @@ header h1 {
     font-weight: 500;
 }
 
+/* Campos de entrada e seleção */
 .form-group input,
 .form-group select {
     width: 100%;
@@ -167,6 +186,7 @@ header h1 {
     transition: all 0.3s ease;
 }
 
+/* Estado de foco dos campos */
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
@@ -174,7 +194,7 @@ header h1 {
     box-shadow: 0 0 0 2px rgba(255, 64, 129, 0.2);
 }
 
-/* Botões */
+/* Estilo dos Botões */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
@@ -190,16 +210,18 @@ header h1 {
     color: white;
 }
 
+/* Efeito hover nos botões */
 .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3);
 }
 
+/* Variante secundária do botão */
 .btn-secondary {
     background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
 }
 
-/* Cards */
+/* Grid de Cards */
 .alunos-grid,
 .professores-grid,
 .turmas-grid {
@@ -209,6 +231,7 @@ header h1 {
     margin-top: 2rem;
 }
 
+/* Estilo dos Cards */
 .aluno-card,
 .professor-card,
 .turma-card {
@@ -221,6 +244,7 @@ header h1 {
     transition: all 0.3s ease;
 }
 
+/* Efeito hover nos cards */
 .aluno-card:hover,
 .professor-card:hover,
 .turma-card:hover {
@@ -228,6 +252,7 @@ header h1 {
     box-shadow: 0 8px 16px rgba(255, 64, 129, 0.2);
 }
 
+/* Área de ações dos cards */
 .aluno-actions,
 .professor-actions,
 .turma-actions {
@@ -236,7 +261,7 @@ header h1 {
     margin-top: 1rem;
 }
 
-/* Pop-up */
+/* Pop-up de Edição */
 #edit-popup {
     display: none;
     position: fixed;

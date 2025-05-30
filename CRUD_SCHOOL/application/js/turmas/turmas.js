@@ -1,8 +1,28 @@
+/**
+ * Sistema de Gerenciamento de Turmas
+ * Este arquivo contém todas as funcionalidades relacionadas ao gerenciamento de turmas
+ * incluindo cadastro, listagem, edição e exclusão.
+ * 
+ * Funcionalidades principais:
+ * - Cadastro de novas turmas
+ * - Listagem de turmas cadastradas
+ * - Edição de dados de turmas
+ * - Exclusão de turmas
+ * - Gerenciamento de status (ativo/inativo)
+ * - Associação com professores
+ */
+
+// URL base da API para operações com turmas
 const API_URL_TURMAS = "https://school-system-spi.onrender.com/api/turmas";
 
+/**
+ * Event listener para o formulário de cadastro de turmas
+ * @description Coleta os dados do formulário e envia para a API
+ */
 document.getElementById("turma-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target;
+    // Coleta e formata os dados do formulário
     const data = {
         nome: form.nome.value,
         materia: form.materia.value,
@@ -12,6 +32,7 @@ document.getElementById("turma-form").addEventListener("submit", async (e) => {
     };
 
     try {
+        // Envia os dados para a API
         const response = await fetch(API_URL_TURMAS, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -32,12 +53,16 @@ document.getElementById("turma-form").addEventListener("submit", async (e) => {
     }
 });
 
-// Função de Listar Turmas
+/**
+ * Event listener para o botão de listar turmas
+ * @description Busca todas as turmas cadastradas e exibe em cards na interface
+ */
 document.getElementById("listar-turmas").addEventListener("click", async () => {
     try {
         const container = document.getElementById("turmas-lista");
         container.innerHTML = "<p>Carregando turmas...</p>";
 
+        // Busca a lista de turmas na API
         const response = await fetch(API_URL_TURMAS);
         
         if (!response.ok) {
@@ -46,11 +71,13 @@ document.getElementById("listar-turmas").addEventListener("click", async () => {
 
         const turmas = await response.json();
 
+        // Verifica se existem turmas cadastradas
         if (!turmas || turmas.length === 0) {
             container.innerHTML = "<p>Nenhuma turma cadastrada.</p>";
             return;
         }
 
+        // Gera o HTML com a lista de turmas em cards
         container.innerHTML = `
             <h2>Lista de Turmas</h2>
             <div class="turmas-grid">
@@ -78,9 +105,14 @@ document.getElementById("listar-turmas").addEventListener("click", async () => {
     }
 });
 
-// Função de Editar Turma
+/**
+ * Carrega os dados de uma turma para edição
+ * @param {number} id - ID da turma a ser editada
+ * @description Busca os dados da turma na API e preenche o formulário de edição
+ */
 async function editarTurma(id) {
     try {
+        // Busca os dados da turma na API
         const response = await fetch(`${API_URL_TURMAS}/${id}`);
         
         if (!response.ok) {
@@ -93,7 +125,7 @@ async function editarTurma(id) {
             throw new Error("Dados da turma não encontrados");
         }
 
-        // Preenchendo o formulário de edição
+        // Preenche o formulário com os dados da turma
         document.getElementById("turma-id").value = turma.turma.id;
         document.getElementById("update-nome").value = turma.turma.nome;
         document.getElementById("update-materia").value = turma.turma.materia;
@@ -101,7 +133,7 @@ async function editarTurma(id) {
         document.getElementById("update-ativo").value = turma.turma.ativo;
         document.getElementById("update-professor_id").value = turma.turma.professor_id;
 
-        // Exibindo o pop-up para edição
+        // Exibe o popup de edição
         document.getElementById("edit-popup").style.display = "block";
     } catch (error) {
         console.error("Erro ao editar turma:", error);
@@ -109,12 +141,16 @@ async function editarTurma(id) {
     }
 }
 
-// Função de Atualizar Turma
+/**
+ * Event listener para o formulário de atualização de turma
+ * @description Coleta os dados atualizados e envia para a API
+ */
 document.getElementById("update-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     try {
         const form = e.target;
         const turmaId = document.getElementById("turma-id").value;
+        // Coleta e formata os dados do formulário
         const data = {
             nome: form["update-nome"].value,
             materia: form["update-materia"].value,
@@ -123,6 +159,7 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
             professor_id: parseInt(form["update-professor_id"].value)
         };
 
+        // Envia os dados atualizados para a API
         const response = await fetch(`${API_URL_TURMAS}/${turmaId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -138,10 +175,8 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
         console.log(result);
         form.reset();
 
-        // Fechar o pop-up após a atualização
+        // Fecha o popup e atualiza a lista
         document.getElementById("edit-popup").style.display = "none";
-        
-        // Atualizar a lista de turmas
         document.getElementById("listar-turmas").click();
     } catch (error) {
         console.error("Erro ao atualizar turma:", error);
@@ -149,13 +184,18 @@ document.getElementById("update-form").addEventListener("submit", async (e) => {
     }
 });
 
-// Função de Excluir Turma
+/**
+ * Exclui uma turma do sistema
+ * @param {number} id - ID da turma a ser excluída
+ * @description Solicita confirmação antes de excluir e atualiza a lista após a exclusão
+ */
 async function excluirTurma(id) {
     if (!confirm("Tem certeza que deseja excluir esta turma?")) {
         return;
     }
 
     try {
+        // Envia a requisição de exclusão para a API
         const response = await fetch(`${API_URL_TURMAS}/${id}`, {
             method: "DELETE"
         });
@@ -168,7 +208,7 @@ async function excluirTurma(id) {
         alert("Turma excluída com sucesso!");
         console.log(result);
 
-        // Atualizar a lista de turmas
+        // Atualiza a lista de turmas
         document.getElementById("listar-turmas").click();
     } catch (error) {
         console.error("Erro ao excluir turma:", error);
@@ -176,7 +216,10 @@ async function excluirTurma(id) {
     }
 }
 
-// Função para fechar o pop-up de edição
+/**
+ * Event listener para fechar o popup de edição
+ * @description Oculta o popup quando o botão de fechar é clicado
+ */
 document.getElementById("close-popup").addEventListener("click", () => {
     document.getElementById("edit-popup").style.display = "none";
 });

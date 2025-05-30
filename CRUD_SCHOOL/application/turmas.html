@@ -1,49 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Meta tags para configuração básica da página -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Cadastro e gerenciamento de turmas">
     <title>Cadastro de Turma - Sistema de Gerenciamento Escolar</title>
+    
+    <!-- Importação de estilos -->
     <link rel="stylesheet" href="style.css">
+    <!-- Importação da fonte Poppins do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Container principal para centralizar o conteúdo -->
     <div class="container">
+        <!-- Cabeçalho com título e subtítulo da página -->
         <header>
             <h1>Gerenciamento de Turmas</h1>
             <p class="subtitle">Cadastre e gerencie as turmas da sua escola</p>
         </header>
 
+        <!-- Menu de navegação principal -->
         <nav class="nav">
             <ul class="nav-links">
+                <!-- Links para as diferentes seções do sistema com ícones -->
                 <li><a href="alunos.html">👨‍🎓 Alunos</a></li>
                 <li><a href="professores.html">👨‍🏫 Professores</a></li>
                 <li><a href="turmas.html" class="active">👥 Turmas</a></li>
             </ul>
         </nav>
 
+        <!-- Link para retornar à página principal -->
         <a href="index.html" class="btn-voltar">← Voltar para a Página Principal</a>
 
+        <!-- Conteúdo principal da página -->
         <main>
+            <!-- Container do formulário de cadastro -->
             <div class="form-container">
                 <h2>Cadastro de Turma</h2>
+                <!-- Formulário de cadastro com validação HTML5 -->
                 <form id="turma-form">
+                    <!-- Campo para nome da turma -->
                     <div class="form-group">
                         <label for="nome">Nome da Turma:</label>
                         <input type="text" id="nome" name="nome" required placeholder="Digite o nome da turma">
                     </div>
                     
+                    <!-- Campo para matéria da turma -->
                     <div class="form-group">
                         <label for="materia">Matéria:</label>
                         <input type="text" id="materia" name="materia" required placeholder="Digite a matéria da turma">
                     </div>
                     
+                    <!-- Campo opcional para descrição da turma -->
                     <div class="form-group">
                         <label for="descricao">Descrição:</label>
                         <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição para a turma">
                     </div>
                     
+                    <!-- Campo para status da turma (Ativa/Inativa) -->
                     <div class="form-group">
                         <label for="ativo">Status:</label>
                         <select id="ativo" name="ativo" required>
@@ -52,28 +68,35 @@
                         </select>
                     </div>
                     
+                    <!-- Campo para ID do professor responsável -->
                     <div class="form-group">
                         <label for="professor_id">ID do Professor:</label>
                         <input type="number" id="professor_id" name="professor_id" required placeholder="Digite o ID do professor responsável">
                     </div>
                     
+                    <!-- Botão de submissão do formulário -->
                     <button type="submit" class="btn btn-primary">Cadastrar Turma</button>
                 </form>
             </div>
 
+            <!-- Container para botões de ação -->
             <div class="actions-container">
                 <button id="listar-turmas" class="btn btn-primary">📋 Listar Turmas</button>
             </div>
 
+            <!-- Container para exibir a lista de turmas -->
             <div id="turmas-lista" class="lista-container"></div>
 
-            <!-- Pop-up para editar turma -->
+            <!-- Pop-up modal para edição de turma -->
             <div id="edit-popup" class="popup">
                 <div class="popup-content">
                     <h2>Editar Turma</h2>
+                    <!-- Formulário de edição com campos pré-preenchidos -->
                     <form id="update-form">
+                        <!-- Campo oculto para armazenar o ID da turma em edição -->
                         <input type="hidden" id="turma-id">
                         
+                        <!-- Campos do formulário de edição -->
                         <div class="form-group">
                             <label for="update-nome">Nome da Turma:</label>
                             <input type="text" id="update-nome" required placeholder="Digite o nome da turma">
@@ -89,6 +112,7 @@
                             <input type="text" id="update-descricao" placeholder="Digite uma descrição para a turma">
                         </div>
                         
+                        <!-- Campo para atualização do status -->
                         <div class="form-group">
                             <label for="update-ativo">Status:</label>
                             <select id="update-ativo" required>
@@ -97,11 +121,13 @@
                             </select>
                         </div>
                         
+                        <!-- Campo para atualização do professor responsável -->
                         <div class="form-group">
                             <label for="update-professor_id">ID do Professor:</label>
                             <input type="number" id="update-professor_id" required placeholder="Digite o ID do professor responsável">
                         </div>
                         
+                        <!-- Botões de ação do pop-up -->
                         <div class="popup-buttons">
                             <button type="submit" class="btn btn-primary">Atualizar</button>
                             <button type="button" id="close-popup" class="btn btn-secondary">Cancelar</button>
@@ -111,11 +137,13 @@
             </div>
         </main>
 
+        <!-- Rodapé com informações de copyright -->
         <footer>
             <p>&copy; 2025 Sistema de Gerenciamento Escolar. Todos os direitos reservados.</p>
         </footer>
     </div>
 
+    <!-- Importação do script JavaScript específico para a página de turmas -->
     <script src="js/turmas/turmas.js"></script>
 </body>
 </html>

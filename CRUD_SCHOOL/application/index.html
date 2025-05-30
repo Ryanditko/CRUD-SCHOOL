@@ -8,42 +8,42 @@
     <title>Sistema de Gerenciamento Escolar</title>
 
     <!-- Recursos externos -->
-    <!-- Google Fonts - Fonte Roboto para melhor legibilidade -->
+    <!-- Google Fonts - Fonte Roboto para melhor legibilidade e experiência do usuário -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome - Ícones modernos e responsivos -->
+    <!-- Font Awesome - Biblioteca de ícones para interface moderna e intuitiva -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Estilos personalizados -->
+    <!-- Estilos personalizados do sistema -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Configurações PWA (Progressive Web App) -->
+    <!-- Configurações PWA (Progressive Web App) para instalação offline -->
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="icons/icon-192x192.png">
     <meta name="theme-color" content="#ff4081">
 </head>
 <body>
-    <!-- Container principal para centralizar o conteúdo -->
+    <!-- Container principal para centralizar e limitar a largura do conteúdo -->
     <div class="container">
-        <!-- Cabeçalho com título e subtítulo -->
+        <!-- Cabeçalho com título principal e subtítulo explicativo -->
         <header>
             <h1>Sistema de Gerenciamento Escolar</h1>
             <p class="subtitle">Gerencie alunos, professores e turmas de forma eficiente</p>
         </header>
 
-        <!-- Menu de navegação principal -->
+        <!-- Menu de navegação principal com ícones intuitivos -->
         <nav class="nav">
             <ul class="nav-links">
-                <!-- Links para as diferentes seções do sistema -->
+                <!-- Links para as diferentes seções do sistema com ícones representativos -->
                 <li><a href="alunos.html"><i class="fas fa-user-graduate"></i> Alunos</a></li>
                 <li><a href="professores.html"><i class="fas fa-chalkboard-teacher"></i> Professores</a></li>
                 <li><a href="turmas.html"><i class="fas fa-users"></i> Turmas</a></li>
             </ul>
         </nav>
 
-        <!-- Conteúdo principal da página -->
+        <!-- Conteúdo principal da página com cards informativos -->
         <main>
-            <!-- Grid de cards para acesso rápido às funcionalidades -->
+            <!-- Grid de cards para acesso rápido às funcionalidades principais -->
             <div class="cards-container">
-                <!-- Card de Alunos -->
+                <!-- Card de Alunos - Gerencia informações dos estudantes -->
                 <div class="card" data-aos="fade-up">
                     <div class="card-icon">
                         <i class="fas fa-user-graduate"></i>
@@ -58,7 +58,7 @@
                     <a href="alunos.html" class="btn">Acessar</a>
                 </div>
 
-                <!-- Card de Professores -->
+                <!-- Card de Professores - Gerencia informações dos docentes -->
                 <div class="card" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
@@ -73,7 +73,7 @@
                     <a href="professores.html" class="btn">Acessar</a>
                 </div>
 
-                <!-- Card de Turmas -->
+                <!-- Card de Turmas - Gerencia informações das turmas -->
                 <div class="card" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-icon">
                         <i class="fas fa-users"></i>
@@ -90,26 +90,26 @@
             </div>
         </main>
 
-        <!-- Rodapé com informações de copyright -->
+        <!-- Rodapé com informações de copyright e direitos autorais -->
         <footer>
             <p>&copy; 2025 Sistema de Gerenciamento Escolar. Todos os direitos reservados.</p>
         </footer>
     </div>
 
-    <!-- Scripts JavaScript -->
+    <!-- Scripts JavaScript para funcionalidades dinâmicas -->
     <script>
-        // Animação dos cards ao carregar a página
+        // Animação dos cards ao carregar a página - Efeito de fade e slide
         document.addEventListener('DOMContentLoaded', () => {
             const cards = document.querySelectorAll('.card');
             cards.forEach((card, index) => {
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, index * 100);
+                }, index * 100); // Delay progressivo para cada card
             });
         });
 
-        // Registro do Service Worker para funcionalidades PWA
+        // Registro do Service Worker para funcionalidades PWA e uso offline
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js')

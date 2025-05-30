@@ -2,6 +2,14 @@
  * Sistema de Gerenciamento de Professores
  * Este arquivo contém todas as funcionalidades relacionadas ao gerenciamento de professores
  * incluindo cadastro, listagem, edição e exclusão.
+ * 
+ * Funcionalidades principais:
+ * - Cadastro de novos professores
+ * - Listagem de professores cadastrados
+ * - Edição de dados de professores
+ * - Exclusão de professores
+ * - Validação de dados
+ * - Feedback visual para o usuário
  */
 
 // URL base da API para operações com professores
@@ -14,17 +22,17 @@ const API_URL_PROFESSORES = "https://school-system-spi.onrender.com/api/professo
  * @throws {Error} Se os dados forem inválidos
  */
 function validarDadosProfessor(data) {
-    // Verifica campos obrigatórios
+    // Verifica campos obrigatórios (nome, idade e matéria)
     if (!data.nome || !data.idade || !data.materia) {
         throw new Error('Por favor, preencha todos os campos obrigatórios.');
     }
 
-    // Valida a idade do professor
+    // Valida a idade do professor (entre 18 e 100 anos)
     if (data.idade < 18 || data.idade > 100) {
         throw new Error('A idade deve estar entre 18 e 100 anos.');
     }
 
-    // Retorna os dados formatados
+    // Retorna os dados formatados com espaços em branco removidos
     return {
         ...data,
         nome: data.nome.trim(),
@@ -36,6 +44,7 @@ function validarDadosProfessor(data) {
 /**
  * Exibe uma mensagem de erro temporária na interface
  * @param {string} mensagem - Mensagem de erro a ser exibida
+ * @description A mensagem é exibida por 5 segundos e depois removida automaticamente
  */
 function mostrarErro(mensagem) {
     const errorDiv = document.createElement('div');
@@ -48,6 +57,7 @@ function mostrarErro(mensagem) {
 /**
  * Exibe uma mensagem de sucesso temporária na interface
  * @param {string} mensagem - Mensagem de sucesso a ser exibida
+ * @description A mensagem é exibida por 5 segundos e depois removida automaticamente
  */
 function mostrarSucesso(mensagem) {
     const successDiv = document.createElement('div');
@@ -59,6 +69,7 @@ function mostrarSucesso(mensagem) {
 
 /**
  * Abre o popup de edição de professor
+ * @description Torna o popup visível na interface
  */
 function abrirPopup() {
     document.getElementById('edit-popup').style.display = 'block';
@@ -66,6 +77,7 @@ function abrirPopup() {
 
 /**
  * Fecha o popup de edição de professor
+ * @description Oculta o popup da interface
  */
 function fecharPopup() {
     document.getElementById('edit-popup').style.display = 'none';
@@ -74,6 +86,7 @@ function fecharPopup() {
 /**
  * Carrega os dados de um professor para edição
  * @param {number} id - ID do professor a ser editado
+ * @description Busca os dados do professor na API e preenche o formulário de edição
  */
 async function editarProfessor(id) {
     try {
@@ -99,6 +112,7 @@ async function editarProfessor(id) {
 /**
  * Exclui um professor do sistema
  * @param {number} id - ID do professor a ser excluído
+ * @description Solicita confirmação antes de excluir e atualiza a lista após a exclusão
  */
 async function excluirProfessor(id) {
     if (!confirm('Tem certeza que deseja excluir este professor?')) return;
@@ -119,6 +133,7 @@ async function excluirProfessor(id) {
 
 /**
  * Lista todos os professores cadastrados
+ * @description Busca os professores na API e exibe em cards na interface
  */
 async function listarProfessores() {
     try {
@@ -137,7 +152,7 @@ async function listarProfessores() {
             return;
         }
 
-        // Gera o HTML com a lista de professores
+        // Gera o HTML com a lista de professores em cards
         container.innerHTML = `
             <h2>Lista de Professores</h2>
             <div class="professores-grid">
@@ -179,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     observacoes: formData.get('observacoes')
                 };
                 
-                // Valida e envia os dados
+                // Valida e envia os dados para a API
                 const dadosValidados = validarDadosProfessor(data);
                 
                 const response = await fetch(API_URL_PROFESSORES, {
@@ -218,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     observacoes: formData.get('observacoes')
                 };
                 
-                // Valida e envia os dados
+                // Valida e envia os dados atualizados para a API
                 const dadosValidados = validarDadosProfessor(data);
                 
                 const response = await fetch(`${API_URL_PROFESSORES}/${id}`, {
